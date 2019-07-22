@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>Demonstrations</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description>Servlet Module 2 Démonstration 1</description>
+    <servlet-name>PremiereServletConfigurationWebXML</servlet-name>
+    <servlet-class>fr.eni.javaee.module2.PremiereServletConfigurationWebXML</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PremiereServletConfigurationWebXML</servlet-name>
+    <url-pattern>/modules/module2/PremiereServletConfigurationWebXML</url-pattern>
+  </servlet-mapping>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/modules/module2/demonstrations/error-500.html</location>
+  </error-page>
+  <servlet>
+    <description>Servlet Module 2 Démonstration 8</description>
+    <servlet-name>ServletAvecParametreInitialisationWebXML</servlet-name>
+    <servlet-class>fr.eni.javaee.module2.ServletAvecParametreInitialisationWebXML</servlet-class>
+    <init-param>
+      <description>Un paramètre d'initialisation</description>
+      <param-name>NOM_PARAMETRE</param-name>
+      <param-value>COUCOU</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletAvecParametreInitialisationWebXML</servlet-name>
+    <url-pattern>/modules/module2/ServletAvecParametreInitialisationWebXML</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Paramétrage d'une JSP présente dans le répertoire WEB-INF</description>
+    <servlet-name>premiereJSPDansWEB_INF</servlet-name>
+    <jsp-file>/WEB-INF/modules/module3/demonstrations/premiereJSPDansWEB-INF.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>premiereJSPDansWEB_INF</servlet-name>
+    <url-pattern>/modules/module3/demonstrations/secondePremiereJSP</url-pattern>
+  </servlet-mapping>
+  <context-param>
+  	<param-name>EMAIL_ADMINISTRATEUR</param-name>
+  	<param-value>mail@admin.fr</param-value>
+  </context-param>
+</web-app>
