@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body onload="load();">
+<body onload="list();">
 <h1>Prise de notes</h1>
 	<div id="notes"></div>
 	<div>

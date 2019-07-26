@@ -1,7 +1,7 @@
 
 var notesDiv = document.getElementById("notes");
 
-function createXHR() {
+function createXHRForList() {
 	    if (window.XMLHttpRequest) {
 	        xhr = new XMLHttpRequest();
 	    } else if (window.ActiveXObject) {
@@ -20,8 +20,28 @@ function createXHR() {
 	    return xhr;
 	}
 
-function load() {
-	var xhr = createXHR();
+function createXHRForOthers() {
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+            	list();
+            	
+            } else {
+                echec(xhr.status, xhr.responseText);
+            }
+        }
+    };
+    return xhr;
+}
+
+function list() {
+	var xhr = createXHRForList();
 	xhr.open("GET", "/myTPPriseDeNote/rest/notes", true);
 	xhr.setRequestHeader("Accept","application/json");
 	xhr.send(null);
@@ -63,7 +83,7 @@ function createNoteList(element) {
 }
 
 function ajouter() {
-	var xhr = createXHR();
+	var xhr = createXHRForOthers();
 	
 	var textarea = document.getElementById("taCreation");
 	var formulaire = "value=" + encodeURIComponent(textarea.value);
@@ -72,13 +92,12 @@ function ajouter() {
 	xhr.setRequestHeader("Accept","application/json");
     xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr.send(formulaire);
-	load();
 	textarea.value="";
 	textarea.placeholder="Créez une nouvelle note...";
 }
 
 function modifierNote(id) {
-	var xhr = createXHR();
+	var xhr = createXHRForOthers();
 	
 	var textarea = document.getElementById("ta" + id);
 	var formulaire = "value=" + encodeURIComponent(textarea.value);
@@ -87,12 +106,10 @@ function modifierNote(id) {
 	xhr.setRequestHeader("Accept","application/json");
     xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr.send(formulaire);
-	load();
 }
 
 function supprimerNote(id) {
-	var xhr = createXHR();
+	var xhr = createXHRForOthers();
 	xhr.open("DELETE", "/myTPPriseDeNote/rest/notes/" + id, true);
 	xhr.send(null);
-	load();
 }
